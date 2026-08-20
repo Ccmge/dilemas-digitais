@@ -305,3 +305,212 @@ style.textContent = `
 
 
 document.head.appendChild(style);
+////////////////////////////////////////////////////
+// EFEITO DE CONFETES E BALÕES AO ACERTAR O QUIZ
+////////////////////////////////////////////////////
+
+function createCelebration() {
+
+    const celebration =
+        document.getElementById("celebration");
+
+    if (!celebration) return;
+
+    celebration.innerHTML = "";
+
+
+    const colors = [
+        "#9cff00",
+        "#00e5ff",
+        "#ff3cac",
+        "#ffd166",
+        "#ffffff",
+        "#7c4dff",
+        "#ff5757"
+    ];
+
+
+    // ==========================================
+    // CONFETES
+    // ==========================================
+
+    for (let i = 0; i < 90; i++) {
+
+        const confetti =
+            document.createElement("div");
+
+        confetti.classList.add("confetti");
+
+
+        // Metade sai da esquerda
+        // e metade sai da direita
+
+        const fromLeft = i % 2 === 0;
+
+
+        if (fromLeft) {
+
+            confetti.style.left =
+                `${Math.random() * 12}%`;
+
+        } else {
+
+            confetti.style.left =
+                `${88 + Math.random() * 12}%`;
+
+        }
+
+
+        confetti.style.background =
+            colors[
+                Math.floor(
+                    Math.random() * colors.length
+                )
+            ];
+
+
+        const x = fromLeft
+            ? 100 + Math.random() * 450
+            : -100 - Math.random() * 450;
+
+
+        const y =
+            -(300 + Math.random() * 550);
+
+
+        confetti.style.setProperty(
+            "--x",
+            `${x}px`
+        );
+
+        confetti.style.setProperty(
+            "--y",
+            `${y}px`
+        );
+
+        confetti.style.setProperty(
+            "--rotation",
+            `${360 + Math.random() * 1080}deg`
+        );
+
+        confetti.style.setProperty(
+            "--duration",
+            `${1.8 + Math.random() * 1.8}s`
+        );
+
+        confetti.style.setProperty(
+            "--spin",
+            `${.5 + Math.random()}s`
+        );
+
+        confetti.style.setProperty(
+            "--delay",
+            `${Math.random() * .3}s`
+        );
+
+
+        celebration.appendChild(confetti);
+
+    }
+
+
+    // ==========================================
+    // BALÕES
+    // ==========================================
+
+    for (let i = 0; i < 18; i++) {
+
+        const balloon =
+            document.createElement("div");
+
+        balloon.classList.add("balloon");
+
+
+        const fromLeft = i % 2 === 0;
+
+
+        if (fromLeft) {
+
+            balloon.style.left =
+                `${2 + Math.random() * 15}%`;
+
+        } else {
+
+            balloon.style.right =
+                `${2 + Math.random() * 15}%`;
+
+        }
+
+
+        const color =
+            colors[
+                Math.floor(
+                    Math.random() * colors.length
+                )
+            ];
+
+
+        balloon.style.background = color;
+
+        balloon.style.color = color;
+
+
+        const x = fromLeft
+            ? 100 + Math.random() * 350
+            : -100 - Math.random() * 350;
+
+
+        const y =
+            -(350 + Math.random() * 450);
+
+
+        balloon.style.setProperty(
+            "--x",
+            `${x}px`
+        );
+
+        balloon.style.setProperty(
+            "--y",
+            `${y}px`
+        );
+
+        balloon.style.setProperty(
+            "--rotation",
+            `${-20 + Math.random() * 40}deg`
+        );
+
+        balloon.style.setProperty(
+            "--duration",
+            `${3 + Math.random() * 2}s`
+        );
+
+        balloon.style.setProperty(
+            "--delay",
+            `${Math.random() * .5}s`
+        );
+
+
+        const size =
+            38 + Math.random() * 22;
+
+        balloon.style.width =
+            `${size}px`;
+
+        balloon.style.height =
+            `${size * 1.25}px`;
+
+
+        celebration.appendChild(balloon);
+
+    }
+
+
+    // Remove os elementos depois da animação
+
+    setTimeout(() => {
+
+        celebration.innerHTML = "";
+
+    }, 5500);
+
+}

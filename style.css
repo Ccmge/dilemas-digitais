@@ -888,3 +888,167 @@ footer p {
     }
 
 }
+/* =========================================
+   EFEITO DE CONFETES E BALÕES
+   ========================================= */
+
+#celebration {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 9999;
+}
+
+
+/* CONFETES */
+
+.confetti {
+    position: absolute;
+    bottom: -25px;
+
+    width: 9px;
+    height: 15px;
+
+    opacity: 0;
+
+    border-radius: 2px;
+
+    animation:
+        confetti-fly var(--duration) ease-out forwards,
+        confetti-spin var(--spin) linear infinite;
+
+    animation-delay: var(--delay);
+}
+
+@keyframes confetti-fly {
+
+    0% {
+        opacity: 1;
+
+        transform:
+            translate(0, 0)
+            rotate(0deg)
+            scale(.5);
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            translate(var(--x), var(--y))
+            rotate(var(--rotation))
+            scale(1);
+    }
+}
+
+@keyframes confetti-spin {
+
+    from {
+        rotate: 0deg;
+    }
+
+    to {
+        rotate: 360deg;
+    }
+}
+
+
+/* BALÕES */
+
+.balloon {
+    position: absolute;
+    bottom: -100px;
+
+    width: 45px;
+    height: 58px;
+
+    border-radius: 50% 50% 45% 45%;
+
+    opacity: 0;
+
+    box-shadow:
+        inset -8px -8px 12px rgba(0,0,0,.18),
+        inset 7px 7px 10px rgba(255,255,255,.25);
+
+    animation:
+        balloon-fly var(--duration) ease-out forwards;
+
+    animation-delay: var(--delay);
+}
+
+
+/* Brilho do balão */
+
+.balloon::before {
+    content: "";
+
+    position: absolute;
+
+    width: 10px;
+    height: 17px;
+
+    top: 9px;
+    left: 10px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.5);
+
+    transform: rotate(-25deg);
+}
+
+
+/* Bico do balão */
+
+.balloon::after {
+    content: "";
+
+    position: absolute;
+
+    bottom: -7px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 9px solid currentColor;
+}
+
+@keyframes balloon-fly {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translate(0, 0)
+            rotate(0deg)
+            scale(.7);
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    50% {
+        transform:
+            translate(var(--x), var(--y))
+            rotate(var(--rotation))
+            scale(1);
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            translate(
+                calc(var(--x) * 1.15),
+                calc(var(--y) - 100px)
+            )
+            rotate(var(--rotation))
+            scale(.85);
+    }
+}
